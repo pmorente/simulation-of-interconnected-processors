@@ -1,0 +1,14 @@
+OPCIONS = -D_JUDGE_ -D_GLIBCXX_DEBUG -O2 -Wall -Wextra -Werror -Wno-sign-compare -std=c++11
+
+program.exe: program.o cluster.o processqueue.o processor.o process.o priority.o
+	g++ $(OPCIONS) -o program.exe program.o cluster.o processqueue.o processor.o process.o priority.o 
+	rm -f *.o *.tar
+
+tarfile:
+	tar -cvf practica.tar program.cc cluster.cc cluster.hh processqueue.cc processqueue.hh processor.cc processor.hh process.cc process.hh priority.cc priority.hh Makefile html.zip
+
+program.o: program.cc cluster.cc processqueue.cc processor.cc process.cc priority.cc
+	g++ $(OPCIONS) -c program.cc cluster.cc processqueue.cc processor.cc process.cc priority.cc 
+
+clean:
+	rm -f *.o program.exe *.tar
